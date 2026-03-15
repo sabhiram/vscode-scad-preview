@@ -1,0 +1,58 @@
+{
+  "name": "scad-preview",
+  "displayName": "SCAD Preview",
+  "description": "Live 3D preview of SCAD files and STL export",
+  "version": "0.1.0",
+  "publisher": "sabhiram",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onLanguage:scad"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "scadPreview.open",
+        "title": "SCAD: Open Preview"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "scadPreview.open",
+        "key": "ctrl+shift+alt+p",
+        "mac": "cmd+shift+ctrl+p",
+        "when": "resourceExtname == .scad"
+      }
+    ],
+    "languages": [
+      {
+        "id": "scad",
+        "extensions": [
+          ".scad"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@google/model-viewer": "^4.0.0",
+    "@types/three": "^0.183.1",
+    "openscad-wasm": "^0.0.4",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.5.0"
+  }
+}

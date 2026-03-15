@@ -1,0 +1,9 @@
+src/**
+node_modules/**
+!node_modules/openscad-wasm/dist/**
+.gitignore
+tsconfig.json
+esbuild.config.mjs
+**/*.ts
+**/*.map
+PROJECT.md
