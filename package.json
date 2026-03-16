@@ -4,6 +4,12 @@
   "description": "Live 3D preview of SCAD files and STL export",
   "version": "0.1.0",
   "publisher": "sabhiram",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sabhiram/vscode-scad-preview"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -44,7 +50,6 @@
     "package": "vsce package"
   },
   "dependencies": {
-    "@google/model-viewer": "^4.0.0",
     "@types/three": "^0.183.1",
     "openscad-wasm": "^0.0.4",
     "three": "^0.183.2"
