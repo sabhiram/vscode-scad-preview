@@ -2,28 +2,16 @@
 
 declare const self: DedicatedWorkerGlobalScope;
 
-import { createOpenSCAD, type OpenSCADInstance } from "openscad-wasm";
-
-let instance: OpenSCADInstance | null = null;
-let initializing: Promise<OpenSCADInstance> | null = null;
-
-async function getInstance(): Promise<OpenSCADInstance> {
-  if (instance) return instance;
-  if (!initializing) {
-    initializing = createOpenSCAD().then((inst) => {
-      instance = inst;
-      return inst;
-    });
-  }
-  return initializing;
-}
+import { createOpenSCAD } from "openscad-wasm";
 
 self.onmessage = async (e) => {
   const msg = e.data;
 
   if (msg.type === "compile") {
     try {
-      const inst = await getInstance();
+      // Create a fresh instance each compile — WASM module state
+      // is not reliably reusable after callMain
+      const inst = await createOpenSCAD();
       const stl = await inst.renderToStl(msg.source);
       const encoder = new TextEncoder();
       const bytes = encoder.encode(stl);
